@@ -7,7 +7,7 @@ using std::cin;
 
 int main()
 {
-    char value[] = "abcdefghij 1234567890 !@#$%^&*()";
+    char value[] = "abcdefghij ABCDEFGHIJ 1234567890 !@#$%^&*()";
 
     cout << "Input: " << endl << value << endl << endl;
 
@@ -19,15 +19,15 @@ int main()
 
     while (true)
     {
-        if (int(value[i]) >= 97 && int(value[i]) <= 122)
+        if ((value[i] >= 'a' && value[i] <= 'z') || (value[i] >= 'A' && value[i] <= 'Z'))
         {
             letters++;
         }
-        else if (int(value[i]) >= 48 && int(value[i]) <= 57)
+        else if (value[i] >= '0' && value[i] <= '9')
         {
             digits++;
         }
-        else if (int(value[i]) != 32)
+        else if (value[i] != ' ')
         {
             symbols++;
         }
