@@ -14,40 +14,31 @@ int main()
     unsigned long long i = 0;
     while (true)
     {
+        if (value[i] == '\0')
+        {
+            break;
+        }
+
         if ((value[i] < 'a' || value[i] > 'z') && (value[i] < 'A' || value[i] > 'Z'))
         {
             value[i] = ' ';
         }
 
         i++;
-
-        if (value[i] == '\0')
-        {
-            break;
-        }
     }
-
-    i = 0;
 
     unsigned long long words = 0;
     bool inWord = false;
-    while (true)
+    for (unsigned long long j = 0; j <= i; j++)
     {
-        if (value[i] != ' ' && !inWord)
+        if (value[j] != ' ' && !inWord)
         {
             words++;
             inWord = true;
         }
-        else if (value[i] == ' ')
+        else if (value[j] == ' ')
         {
             inWord = false;
-        }
-
-        i++;
-
-        if (value[i] == '\0')
-        {
-            break;
         }
     }
 
