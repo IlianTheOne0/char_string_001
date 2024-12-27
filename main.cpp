@@ -30,6 +30,5 @@ int main()
     cout << "Output: " << endl << value << endl << endl;
 
     char ch = _getch();
-
     return 0;
 }
