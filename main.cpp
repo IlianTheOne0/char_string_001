@@ -1,13 +1,68 @@
 #include <iostream>
 #include <conio.h>
+#include <Windows.h>
 
 using std::cout;
 using std::endl;
 using std::cin;
 
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+void incorrect()
+{
+    SetConsoleTextAttribute(hConsole, 4);
+    cout << "Incorrect number" << endl;
+    SetConsoleTextAttribute(hConsole, 7);
+}
+
+template<typename TValueL, typename TValueR>
+void print(TValueL value, TValueR message)
+{
+    cout << message << value << endl;
+}
+
+template<typename TReturn, typename TValue>
+TReturn get_size(TValue value)
+{
+    TReturn size = 0;
+
+    while (value[size] != '\0')
+    {
+        size++;
+    }
+
+    return size;
+}
+
+template<typename TReturn, typename TValue>
+TReturn get_value(TValue value)
+{
+    TReturn size = get_size<TReturn, const TValue>(value);
+    TReturn input;
+
+    cout << "Enter the character you want to delete: ";
+    cin >> input;
+    cout << endl;
+    
+    return input;
+}
+
+template<typename TValue>
+void deleter(TValue& value)
+{
+    char element = get_value<char, TValue>(value);
+    unsigned long long size = get_size<unsigned long long, const TValue>(value);
+}
+
 int main()
 {
+    char value[] = "Hello world !@#$%^&*()_+-= 0123456789 Hello world !@#$%^&*()_+-= 0123456789";
 
-	char ch = _getch();
-	return 0;
+    print<const char*, const char*>(value, "Input:\nSentence: ");
+    cout << endl;
+    deleter(value);
+    print<const char*, const char*>(value, "Output: ");
+
+    char ch = _getch();
+    return 0;
 }
