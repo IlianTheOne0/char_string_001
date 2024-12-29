@@ -18,11 +18,11 @@ void incorrect()
 template<typename TValueL, typename TValueR>
 void print(TValueL value, TValueR message)
 {
-    cout << message << endl << value << endl << endl;
+    cout << message << value << endl;
 }
 
 template<typename TReturn, typename TValue>
-TReturn _size(TValue value)
+TReturn get_size(TValue value)
 {
     TReturn size = 0;
 
@@ -37,7 +37,7 @@ TReturn _size(TValue value)
 template<typename TReturn, typename TValue>
 TReturn get_value(TValue value)
 {
-    TReturn size = _size<TReturn, const char*>(value);
+    TReturn size = get_size<TReturn, const TValue>(value);
     TReturn input;
 
     do
@@ -50,6 +50,7 @@ TReturn get_value(TValue value)
             incorrect();
             continue;
         }
+        cout << endl;
         break;
     } while (true);
 
@@ -57,20 +58,27 @@ TReturn get_value(TValue value)
 }
 
 template<typename TValue>
-void replacer(TValue value)
+void deleter(TValue& value)
 {
-    unsigned long long index = get_value<unsigned long long, char*>(value);
-    unsigned long long i = 0;
- 
-    
+    unsigned long long index = get_value<unsigned long long, TValue>(value);
+    unsigned long long size = get_size<unsigned long long, const TValue>(value);
+
+    for (unsigned long long i = index; i < size - 1; i++)
+    {
+        value[i] = value[i + 1];
+    }
+
+    value[size - 1] = '\0';
 }
 
 int main()
 {
-    char value[] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+    char value[] = "Hello world!";
 
-    print<const char*, const char*>(value, "Input: ");
-    replacer<char*>(value);
+    print<const char*, const char*>(value, "Input:\nSentence: ");
+    print<unsigned long long, const char*>(get_size<unsigned long long, const char*>(value), "Range: from 0 to ");
+    cout << endl;
+    deleter(value);
     print<const char*, const char*>(value, "Output: ");
 
     char ch = _getch();
