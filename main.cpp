@@ -22,7 +22,7 @@ void incorrect()
 }
 
 template<typename TReturn, typename TValue>
-TReturn get_size(TValue value)
+TReturn get_size(TValue* value)
 {
     TReturn size = 0;
 
@@ -37,16 +37,10 @@ TReturn get_size(TValue value)
 template<typename TValue>
 void get_value(TValue* value)
 {
-    do
-    {
-        cout << "Enter a sentence (max 100 characters): ";
-        cin >> *value;
+    cout << "Enter a sentence (max 100 characters): ";
+    cin.getline(value, 100);
 
-        if (*value > get_size<TValue>(*value))
-        {
-            inc
-        }
-    } while (true);
+    cout << endl;
 }
 
 template<typename TValue>
@@ -55,9 +49,9 @@ void replacer(TValue value)
     unsigned long long i = 0;
     while (true)
     {
-        if (value[i] == ' ')
+        if (value[i] == '.')
         {
-            value[i] = '\t';
+            value[i] = '!';
         }
 
         i++;
@@ -72,7 +66,7 @@ void replacer(TValue value)
 int main()
 {
     char* value = new char[100];
-    get_value<char*>(value);
+    get_value<>(value);
 
     print<const char*, const char*>(value, "Input: ");
     replacer<char*>(value);
