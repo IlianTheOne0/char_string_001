@@ -110,7 +110,7 @@ int main()
     inserter(value);
     print<const char*, const char*>(value, "Output: ");
 
-    delete[] value;
+    delete_value(value);
 
     char ch = _getch();
     return 0;
