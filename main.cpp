@@ -5,13 +5,17 @@ using std::cout;
 using std::endl;
 using std::cin;
 
-int main()
+template<typename TValueL, typename TValueR>
+void print(TValueL value, TValueR message)
 {
-    char value[] = "LOREM123465798ipsum!@#dolor$%^sit&*(AMET)";
+    cout << message << value << endl;
+}
 
-    cout << "Input: " << endl << value << endl << endl;
+template<typename TReturn, typename TValue>
+TReturn replacer(TValue value)
+{
+    TReturn i = 0;
 
-    unsigned long long i = 0;
     while (true)
     {
         if (value[i] == '\0')
@@ -27,9 +31,15 @@ int main()
         i++;
     }
 
-    unsigned long long words = 0;
+    return i;
+}
+
+template<typename TReturn, typename TValue>
+void counter(TValue value, TReturn& words, TReturn i)
+{
     bool inWord = false;
-    for (unsigned long long j = 0; j <= i; j++)
+
+    for (unsigned long long j = 0; j < i; j++)
     {
         if (value[j] != ' ' && !inWord)
         {
@@ -41,10 +51,20 @@ int main()
             inWord = false;
         }
     }
+}
 
-    cout << "Output: " << endl
-        << "Words: " << words << endl
-        << endl;
+int main()
+{
+    char value[] = "LOREM123465798ipsum!@#dolor$%^sit&*(AMET)";
+
+    unsigned long long words = 0;
+    unsigned long long i{};
+
+    print<const char*, const char*>(value, "Input: ");
+    i = replacer<unsigned long long, char*>(value);
+    counter<unsigned long long, char*>(value, words, i);
+    cout << endl << "Output: " << endl;
+    print<unsigned long long, const char*>(words, "Words: ");
 
     char ch = _getch();
     return 0;
