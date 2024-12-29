@@ -8,6 +8,13 @@ using std::cin;
 
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
+template<typename TValue>
+void delete_value(TValue*& value)
+{
+    delete[] value;
+    value = nullptr;
+}
+
 template<typename TValueL, typename TValueR>
 void print(TValueL value, TValueR message)
 {
@@ -71,6 +78,8 @@ int main()
     print<const char*, const char*>(value, "Input: ");
     replacer<char*>(value);
     print<const char*, const char*>(value, "Output: ");
+
+    delete_value(value);
 
     char ch = _getch();
     return 0;
