@@ -5,17 +5,16 @@ using std::cout;
 using std::endl;
 using std::cin;
 
-int main()
+template<typename TValueL, typename TValueR>
+void print(TValueL value, TValueR message)
 {
-    char value[] = "abcdefghij ABCDEFGHIJ 1234567890 !@#$%^&*()";
+    cout << message << value << endl;
+}
 
-    cout << "Input: " << endl << value << endl << endl;
-
+template<typename TReturn, typename TValue>
+void counter(TValue value, TReturn& letters, TReturn& digits, TReturn& symbols)
+{
     unsigned long long i = 0;
-
-    unsigned long long letters = 0;
-    unsigned long long digits = 0;
-    unsigned long long symbols = 0;
 
     while (true)
     {
@@ -39,12 +38,22 @@ int main()
             break;
         }
     }
+}
 
-    cout << "Output: " << endl
-        << "Letters: " << letters << endl
-        << "Digits: " << digits << endl
-        << "Symbols: " << symbols << endl
-        << endl;
+int main()
+{
+    char value[] = "abcdefghij ABCDEFGHIJ 1234567890 !@#$%^&*()";
+
+    unsigned long long letters = 0;
+    unsigned long long digits = 0;
+    unsigned long long symbols = 0;
+
+    print<const char*, const char*>(value, "Input: ");
+    counter<unsigned long long, char*>(value, letters, digits, symbols);
+    cout << endl << "Output: " << endl;
+    print<unsigned long long, const char*>(letters, "\tLetters: ");
+    print<unsigned long long, const char*>(digits, "\tDigits: ");
+    print<unsigned long long, const char*>(symbols, "\tSymbols: ");
 
     char ch = _getch();
     return 0;
