@@ -50,8 +50,23 @@ TReturn get_value(TValue value)
 template<typename TValue>
 void deleter(TValue& value)
 {
-    char element = get_value<char, TValue>(value);
+    char symbol = get_value<char, TValue>(value);
     unsigned long long size = get_size<unsigned long long, const TValue>(value);
+
+    unsigned long long index = 0;
+    for (unsigned long long i = 0; i < size; i++)
+    {
+        if (value[i] == symbol)
+        {
+            index++;
+        }
+        else
+        {
+            value[i - index] = value[i];
+        }
+    }
+
+    value[size - index] = '\0';
 }
 
 int main()
