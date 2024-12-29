@@ -1,12 +1,9 @@
 #include <iostream>
 #include <conio.h>
-#include <Windows.h>
 
 using std::cout;
 using std::endl;
 using std::cin;
-
-HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 template<typename TValue>
 void delete_value(TValue*& value)
@@ -19,13 +16,6 @@ template<typename TValueL, typename TValueR>
 void print(TValueL value, TValueR message)
 {
     cout << message << value << endl << endl;
-}
-
-void incorrect()
-{
-    SetConsoleTextAttribute(hConsole, 4);
-    cout << "Incorrect sentence" << endl;
-    SetConsoleTextAttribute(hConsole, 7);
 }
 
 template<typename TReturn, typename TValue>
