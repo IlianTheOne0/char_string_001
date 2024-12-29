@@ -37,7 +37,6 @@ TReturn get_size(TValue value)
 template<typename TReturn, typename TValue>
 TReturn get_value(TValue value)
 {
-    TReturn size = get_size<TReturn, const TValue>(value);
     TReturn input;
 
     cout << "Enter the character you want to delete: ";
