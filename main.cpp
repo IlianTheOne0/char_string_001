@@ -11,10 +11,10 @@ void print(TValueL value, TValueR message)
     cout << message << value << endl;
 }
 
-template<typename TValue>
-int size(TValue value)
+template<typename TReturn, typename TValue>
+TReturn size(TValue value)
 {
-    int size = 0;
+    TReturn size = 0;
 
     while (value[size] != '\0')
     {
@@ -27,12 +27,12 @@ int size(TValue value)
 template<typename TValue>
 bool is_palindrome(TValue value)
 {
-    int size_ = size<TValue>(value);
-    int half_size = size_ / 2;
+    unsigned long long size_ = size<unsigned long long, TValue>(value);
+    unsigned long half_size = size_ / 2;
 
-    bool state = true;
+    bool state{ 1 };
 
-    for (int i = 0, j = size_ - 1; i < half_size; i++, j--)
+    for (unsigned long long i = 0, j = size_ - 1; i < half_size; i++, j--)
     {
         if (value[i] == value[j])
         {
@@ -51,7 +51,7 @@ bool is_palindrome(TValue value)
 template<typename TValue>
 void replacer(TValue& value)
 {
-    int size_ = size<TValue>(value);
+    unsigned long long size_ = size<unsigned long long, TValue>(value);
     int index = 0;
 
     for (int i = 0; i < size_; i++)
@@ -68,9 +68,9 @@ void replacer(TValue& value)
 template<typename TValue>
 void algorithm(TValue value)
 {
-    print(value, "Input: ");
-    replacer(value);
-    print(is_palindrome(value), "Output: ");
+    print<char*, const char*>(value, "Input: ");
+    replacer<char*>(value);
+    print<bool, const char*>(is_palindrome<char*>(value), "Output: ");
     cout << endl;
 }
 
