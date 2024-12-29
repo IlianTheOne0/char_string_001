@@ -8,13 +8,6 @@ using std::cin;
 
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-void incorrect()
-{
-    SetConsoleTextAttribute(hConsole, 4);
-    cout << "Incorrect number" << endl;
-    SetConsoleTextAttribute(hConsole, 7);
-}
-
 template<typename TValueL, typename TValueR>
 void print(TValueL value, TValueR message)
 {
