@@ -45,7 +45,7 @@ TReturn get_value(TValue value)
         cout << "Enter the index of the character you want to delete: ";
         cin >> input;
 
-        if (input < 0 || input > size)
+        if (input < 0 || input > size - 1)
         {
             incorrect();
             continue;
@@ -76,7 +76,7 @@ int main()
     char value[] = "Hello world!";
 
     print<const char*, const char*>(value, "Input:\nSentence: ");
-    print<unsigned long long, const char*>(get_size<unsigned long long, const char*>(value), "Range: from 0 to ");
+    print<unsigned long long, const char*>(get_size<unsigned long long, const char*>(value) - 1, "Range: from 0 to ");
     cout << endl;
     deleter(value);
     print<const char*, const char*>(value, "Output: ");
